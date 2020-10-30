@@ -1,6 +1,6 @@
-const markup = 0.01;
-const usdUah = 28.48;
-const eurUah = 33.47;
+let markup = 0.01;
+let usdUah = 28.48;
+let eurUah = 33.47;
 
 const buyUsd = usdUah + (usdUah * markup);
 const buyEur = eurUah + (eurUah * markup);
