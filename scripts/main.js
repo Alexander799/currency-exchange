@@ -1,16 +1,3 @@
-$(document).ready(function() {
-    courseRequest();
-})
-
-function courseRequest() {
-    $.get(
-        "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json",
-        function(data) {
-            $(".result").html(data);
-        }
-    );
-}
-
 /*const markup = 0.01;
 const usdUah = 28.48;
 const eurUah = 33.47;
