@@ -1,16 +1,38 @@
-let markup = 0.01;
-let usdUah = 28.48;
-let eurUah = 33.47;
+let markup = 0.01,
+    usdUah = 28.48,
+    eurUah = 33.47;
 
-const buyUsd = usdUah + (usdUah * markup);
-const buyEur = eurUah + (eurUah * markup);
+const patternFloat = RegExp(/^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/),
+    patternInt = RegExp(/^[0-9]{1,10}$/),
+    buyUsd = usdUah + (usdUah * markup),
+    buyEur = eurUah + (eurUah * markup),
+    saleUsd = usdUah - (usdUah * markup),
+    saleEur = eurUah - (eurUah * markup),
+    button = document.getElementById('btn'),
+    usInput = document.getElementById('us-input'),
+    nSelQuotation = document.getElementById('sel-quotation').options.selectedIndex,
+    selQuotation = document.getElementById('sel-quotation').options[nSelQuotation].text,
+    nSaleBuy = document.getElementById('sale-buy').options.selectedIndex,
+    saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text,
+    display = document.getElementById('display');
 
-const saleUsd = usdUah - (usdUah * markup);
-const saleEur = eurUah - (eurUah * markup);
+button.onclick = function checkInput(usInput) {
+    //console.log(patternFloat.test(usInput));
+    if (patternFloat.test(usInput) || patternInt.test(usInput)) {
+        calculate();
+    } else {
+        display.style.color = 'red';
+        display.innerHTML = "Ошибка. Неверный формат";
+    }
+}
 
 function showCourse(course, className, index) {
     let show = document.getElementsByClassName(className);
     show[index].innerHTML = course;
+}
+
+function calculate() {
+    display.innerHTML = "Test ok";
 }
 
 showCourse(buyUsd, 'buy', 0);
