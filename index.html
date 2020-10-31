@@ -26,8 +26,38 @@
             <td class="buy"></td>
             <td class="sale"></td>
         </tr>
+        <tr>
+            <td>
+                <select class="calc" id="sel-quotation">
+                    <option>EUR/UAH</option>
+                    <option>USD/UAH</option>
+                </select>
+            </td>
+            <td>
+                <input class="calc" type="text" id="us-input" placeholder="Сумма">
+            </td>
+            <td>
+                <select class="calc" id="sale-buy">
+                    <option>Купить</option>
+                    <option>Продать</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="display" id="display">Результат</div>
+            </td>
+            <td>
+                <button class="calc" id="btn">Расчитать</button>
+            </td>
+        </tr>
     </table>
-    <a href="https://github.com/Alexander799/currency-exchange" class="link-git">Github</a>
+
+    <footer>
+        <span class="author">&#169;Alexander799</span>
+        <a href="https://github.com/Alexander799/currency-exchange" class="link-git">Github</a>
+        <a href="mailto:sashkakovalev63@gmail.com">My Mail</a>
+    </footer>
     <script src="./scripts/main.js"></script>
 </body>
 
