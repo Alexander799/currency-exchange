@@ -1,8 +1,60 @@
+body {
+    background: #a0a0a0;
+}
+
+table {
+    margin: 20px auto;
+    background: #88bcd4;
+    border-radius: 10px;
+    box-shadow: 5px 5px 26px #6e6e6e, -5px -5px 26px #6e6e6e;
+    font-size: 27px;
+    font-weight: bold;
+    color: #f8d4a0;
+}
+
 table,
 th,
 tr,
 td {
-    padding: 12px;
-    border: 1px solid black;
+    padding: 12px 17px;
+    text-align: center;
+}
+
+table .calc {
+    padding: 12px 17px;
+    border-radius: 7px;
+    background: #5ca9cc;
+    color: #f8d4a0;
     font-size: 20px;
+}
+
+table .calc:active,
+.calc:focus {
+    outline: none;
+}
+
+table ::placeholder {
+    color: #f8d4a0;
+}
+
+table .display {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 7px;
+    background: #5ca9cc;
+    font-size: 23px;
+    font-weight: normal;
+}
+
+footer {
+    padding: 30px;
+    font-size: 23px;
+    color: #1e6fda;
+}
+
+footer .author,
+a {
+    margin-right: 30px;
+    color: inherit;
 }
