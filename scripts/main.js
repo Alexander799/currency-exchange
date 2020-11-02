@@ -18,10 +18,17 @@ const patternFloat = /^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/,
 
 button.onclick = function checkInput() {
     if (patternFloat.test(usInput.value) || patternInt.test(usInput.value)) {
-        calculate();
+        //calculate();
+        console.log(nSelQuotation);
+        console.log(selQuotation);
+        console.log(nSaleBuy);
+        console.log(saleBuy);
+    } else if (usInput.value === "") {
+        display.style.color = 'red';
+        display.innerHTML = "Ошибка. Отстутствует ввод."
     } else {
         display.style.color = 'red';
-        display.innerHTML = "Ошибка. Неверный формат";
+        display.innerHTML = "Ошибка. Неверный формат.";
     }
 }
 
@@ -34,15 +41,15 @@ function calculate() {
     display.style.color = "#f8d4a0"
     if (nSelQuotation === 0) {
         if (nSaleBuy === 0) {
-            showCourse((usInput.value * buyEur), 'display', 0);
-        } else if (nSaleBuy === 1) {
-            showCourse((usInput.value * saleEur), 'display', 0);
-        }
-    } else if (nSelQuotation === 1) {
-        if (nSaleBuy === 0) {
             showCourse((usInput.value * buyUsd), 'display', 0);
         } else if (nSaleBuy === 1) {
             showCourse((usInput.value * saleUsd), 'display', 0);
+        }
+    } else if (nSelQuotation === 1) {
+        if (nSaleBuy === 0) {
+            showCourse((usInput.value * buyEur), 'display', 0);
+        } else if (nSaleBuy === 1) {
+            showCourse((usInput.value * saleEur), 'display', 0);
         }
     }
 }
