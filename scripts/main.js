@@ -27,12 +27,24 @@ button.onclick = function checkInput() {
 
 function showCourse(course, className, index) {
     let show = document.getElementsByClassName(className);
-    show[index].innerHTML = course;
+    show[index].innerHTML = `${course}`;
 }
 
 function calculate() {
     display.style.color = "#f8d4a0"
-    display.innerHTML = "Test ok";
+    if (nSelQuotation === 0) {
+        if (nSaleBuy === 0) {
+            showCourse((usInput.value * buyEur), 'display', 0);
+        } else if (nSaleBuy === 1) {
+            showCourse((usInput.value * saleEur), 'display', 0);
+        }
+    } else if (nSelQuotation === 1) {
+        if (nSaleBuy === 0) {
+            showCourse((usInput.value * buyUsd), 'display', 0);
+        } else if (nSaleBuy === 1) {
+            showCourse((usInput.value * saleUsd), 'display', 0);
+        }
+    }
 }
 
 showCourse(buyUsd, 'buy', 0);
