@@ -10,19 +10,11 @@ const patternFloat = /^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/,
     saleEur = eurUah - (eurUah * markup),
     button = document.getElementById('btn'),
     usInput = document.getElementById('us-input'),
-    nSelQuotation = document.getElementById('sel-quotation').options.selectedIndex,
-    selQuotation = document.getElementById('sel-quotation').options[nSelQuotation].text,
-    nSaleBuy = document.getElementById('sale-buy').options.selectedIndex,
-    saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text,
     display = document.getElementById('display');
 
 button.onclick = function checkInput() {
     if (patternFloat.test(usInput.value) || patternInt.test(usInput.value)) {
-        //calculate();
-        console.log(nSelQuotation);
-        console.log(selQuotation);
-        console.log(nSaleBuy);
-        console.log(saleBuy);
+        calculate();
     } else if (usInput.value === "") {
         display.style.color = 'red';
         display.innerHTML = "Ошибка. Отстутствует ввод."
@@ -38,18 +30,23 @@ function showCourse(course, className, index) {
 }
 
 function calculate() {
+    let nSelQuotation = document.getElementById('sel-quotation').selectedIndex,
+        selQuotation = document.getElementById('sel-quotation').options[nSelQuotation].text,
+        nSaleBuy = document.getElementById('sale-buy').selectedIndex,
+        saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text;
+
     display.style.color = "#f8d4a0"
     if (nSelQuotation === 0) {
         if (nSaleBuy === 0) {
-            showCourse((usInput.value * buyUsd), 'display', 0);
+            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * buyUsd} UAH`, 'display', 0);
         } else if (nSaleBuy === 1) {
-            showCourse((usInput.value * saleUsd), 'display', 0);
+            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * saleUsd} UAH`, 'display', 0);
         }
     } else if (nSelQuotation === 1) {
         if (nSaleBuy === 0) {
-            showCourse((usInput.value * buyEur), 'display', 0);
+            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * buyEur} UAH`, 'display', 0);
         } else if (nSaleBuy === 1) {
-            showCourse((usInput.value * saleEur), 'display', 0);
+            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * saleEur} UAH`, 'display', 0);
         }
     }
 }
