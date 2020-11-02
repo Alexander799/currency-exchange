@@ -2,8 +2,8 @@ let markup = 0.01,
     usdUah = 28.48,
     eurUah = 33.47;
 
-const patternFloat = RegExp(/^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/),
-    patternInt = RegExp(/^[0-9]{1,10}$/),
+const patternFloat = /^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/,
+    patternInt = /^[0-9]{1,10}$/,
     buyUsd = usdUah + (usdUah * markup),
     buyEur = eurUah + (eurUah * markup),
     saleUsd = usdUah - (usdUah * markup),
@@ -16,9 +16,8 @@ const patternFloat = RegExp(/^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/),
     saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text,
     display = document.getElementById('display');
 
-button.onclick = function checkInput(usInput) {
-    //console.log(patternFloat.test(usInput));
-    if (patternFloat.test(usInput) || patternInt.test(usInput)) {
+button.onclick = function checkInput() {
+    if (patternFloat.test(usInput.value) || patternInt.test(usInput.value)) {
         calculate();
     } else {
         display.style.color = 'red';
@@ -32,6 +31,7 @@ function showCourse(course, className, index) {
 }
 
 function calculate() {
+    display.style.color = "#f8d4a0"
     display.innerHTML = "Test ok";
 }
 

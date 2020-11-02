@@ -26,6 +26,7 @@ table .calc {
     background: #5ca9cc;
     color: #f8d4a0;
     font-size: 20px;
+    text-align: right;
 }
 
 table .calc:active,
