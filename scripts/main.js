@@ -1,57 +1,70 @@
-let markup = 0.01,
-    usdUah = 28.48,
-    eurUah = 33.47;
+fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+    .then((response) => { return response.json() })
+    .then(data => {
 
-const patternFloat = /^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/,
-    patternInt = /^[0-9]{1,10}$/,
-    buyUsd = usdUah + (usdUah * markup),
-    buyEur = eurUah + (eurUah * markup),
-    saleUsd = usdUah - (usdUah * markup),
-    saleEur = eurUah - (eurUah * markup),
-    button = document.getElementById('btn'),
-    usInput = document.getElementById('us-input'),
-    display = document.getElementById('display');
+        let buyUsd,
+            buyEur,
+            saleUsd,
+            saleEur;
 
-button.onclick = function checkInput() {
-    if (patternFloat.test(usInput.value) || patternInt.test(usInput.value)) {
-        calculate();
-    } else if (usInput.value === "") {
-        display.style.color = 'red';
-        display.innerHTML = "Ошибка. Отстутствует ввод."
-    } else {
-        display.style.color = 'red';
-        display.innerHTML = "Ошибка. Неверный формат.";
-    }
-}
+        const patternFloat = /^[0-9]{1,10}[\,\.]{1}[0-9]{1,10}$/,
+            patternInt = /^[0-9]{1,10}$/,
+            button = document.getElementById('btn'),
+            usInput = document.getElementById('us-input'),
+            display = document.getElementById('display'),
+            arr = data;
 
-function showCourse(course, className, index) {
-    let show = document.getElementsByClassName(className);
-    show[index].innerHTML = `${course}`;
-}
-
-function calculate() {
-    let nSelQuotation = document.getElementById('sel-quotation').selectedIndex,
-        selQuotation = document.getElementById('sel-quotation').options[nSelQuotation].text,
-        nSaleBuy = document.getElementById('sale-buy').selectedIndex,
-        saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text;
-
-    display.style.color = "#f8d4a0"
-    if (nSelQuotation === 0) {
-        if (nSaleBuy === 0) {
-            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * buyUsd} UAH`, 'display', 0);
-        } else if (nSaleBuy === 1) {
-            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * saleUsd} UAH`, 'display', 0);
+        for (let index = 0; index < arr.length; index++) {
+            if (data[index].ccy === "USD") {
+                buyUsd = data[index].buy;
+                saleUsd = data[index].sale;
+            } else if (data[index].ccy === "EUR") {
+                buyEur = data[index].buy;
+                saleEur = data[index].sale;
+            }
         }
-    } else if (nSelQuotation === 1) {
-        if (nSaleBuy === 0) {
-            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * buyEur} UAH`, 'display', 0);
-        } else if (nSaleBuy === 1) {
-            showCourse(`${selQuotation} ${saleBuy} ${usInput.value * saleEur} UAH`, 'display', 0);
-        }
-    }
-}
 
-showCourse(buyUsd, 'buy', 0);
-showCourse(buyEur, 'buy', 1);
-showCourse(saleUsd, 'sale', 0);
-showCourse(saleEur, 'sale', 1);
+        button.onclick = function checkInput() {
+            if (patternFloat.test(usInput.value) || patternInt.test(usInput.value)) {
+                calculate();
+            } else if (usInput.value === "") {
+                display.style.color = 'red';
+                display.innerHTML = "Ошибка. Отстутствует ввод."
+            } else {
+                display.style.color = 'red';
+                display.innerHTML = "Ошибка. Неверный формат.";
+            }
+        }
+
+        function showCourse(course, className, index) {
+            let show = document.getElementsByClassName(className);
+            show[index].innerHTML = parseFloat(course).toFixed(2);
+        }
+
+        function calculate() {
+            let nSelQuotation = document.getElementById('sel-quotation').selectedIndex,
+                //selQuotation = document.getElementById('sel-quotation').options[nSelQuotation].text,
+                nSaleBuy = document.getElementById('sale-buy').selectedIndex;
+            //saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text;
+
+            display.style.color = "#f8d4a0";
+            if (nSelQuotation === 0) {
+                if (nSaleBuy === 0) {
+                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * buyUsd} UAH`, 'display', 0);
+                } else if (nSaleBuy === 1) {
+                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * saleUsd} UAH`, 'display', 0);
+                }
+            } else if (nSelQuotation === 1) {
+                if (nSaleBuy === 0) {
+                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * buyEur} UAH`, 'display', 0);
+                } else if (nSaleBuy === 1) {
+                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * saleEur} UAH`, 'display', 0);
+                }
+            }
+        }
+        showCourse(buyUsd, 'buy', 0);
+        showCourse(buyEur, 'buy', 1);
+        showCourse(saleUsd, 'sale', 0);
+        showCourse(saleEur, 'sale', 1);
+    })
+    .catch(err => { console.log(err) })
