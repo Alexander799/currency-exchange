@@ -43,22 +43,20 @@ fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
 
         function calculate() {
             let nSelQuotation = document.getElementById('sel-quotation').selectedIndex,
-                //selQuotation = document.getElementById('sel-quotation').options[nSelQuotation].text,
                 nSaleBuy = document.getElementById('sale-buy').selectedIndex;
-            //saleBuy = document.getElementById('sale-buy').options[nSelQuotation].text;
 
             display.style.color = "#f8d4a0";
             if (nSelQuotation === 0) {
                 if (nSaleBuy === 0) {
-                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * buyUsd} UAH`, 'display', 0);
+                    showCourse(`${usInput.value * buyUsd} UAH`, 'display', 0);
                 } else if (nSaleBuy === 1) {
-                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * saleUsd} UAH`, 'display', 0);
+                    showCourse(`${usInput.value * saleUsd} UAH`, 'display', 0);
                 }
             } else if (nSelQuotation === 1) {
                 if (nSaleBuy === 0) {
-                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * buyEur} UAH`, 'display', 0);
+                    showCourse(`${usInput.value * buyEur} UAH`, 'display', 0);
                 } else if (nSaleBuy === 1) {
-                    showCourse( /*${selQuotation} ${saleBuy}*/ `${usInput.value * saleEur} UAH`, 'display', 0);
+                    showCourse(`${usInput.value * saleEur} UAH`, 'display', 0);
                 }
             }
         }
