@@ -16,11 +16,11 @@ fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
 
         for (let index = 0; index < arr.length; index++) {
             if (data[index].ccy === "USD") {
-                buyUsd = data[index].buy;
-                saleUsd = data[index].sale;
+                buyUsd = data[index].sale;
+                saleUsd = data[index].buy;
             } else if (data[index].ccy === "EUR") {
-                buyEur = data[index].buy;
-                saleEur = data[index].sale;
+                buyEur = data[index].sale;
+                saleEur = data[index].buy;
             }
         }
 
